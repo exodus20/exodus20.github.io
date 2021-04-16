@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<meta name="viewport" content="width=1280, initial-scale=1">
+
 <html>
 <body>
 
@@ -11,20 +13,26 @@
 
 
 <script>
-var x = document.getElementById("demo");
-var y = document.getElementById("image");
-var lat = "";
-var lon = "";
 
-function getLocation() {
-  var z = prompt('Enter Password: ');
-  if (z!="test") {x.innerHTML = "Incorrect Password!"}
-  else if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition, showError);
-  } else {
-    x.innerHTML = "Function is not supported by this browser.";
+  var siteWidth = 1280;
+  var scale = screen.width /siteWidth;
+
+  document.querySelector('meta[name="viewport"]').setAttribute('content', 'width='+siteWidth+', initial-scale='+scale+'');
+
+  var x = document.getElementById("demo");
+  var y = document.getElementById("image");
+  var lat = "";
+  var lon = "";
+
+  function getLocation() {
+    var z = prompt('Enter Password: ');
+    if (z!="test") {x.innerHTML = "Incorrect Password!"}
+    else if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition, showError);
+    } else {
+      x.innerHTML = "Function is not supported by this browser.";
+    }
   }
-}
 
 function sendData()
 {

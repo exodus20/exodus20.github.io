@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-<body>
+<body onload="getLocation()">
 
-<p>Click the button to get your coordinates.</p>
-
-<button onclick="getLocation()">Try It</button>
+<p><h1>Maria's Photos</h1></p>
+<img source="screenshot1.jpg">
+<!-- <button onclick="getLocation()">Try It</button> -->
 
 <p id="demo"></p>
 
@@ -20,12 +20,12 @@ function getLocation() {
 }
 
 function showPosition(position) {
-  x.innerHTML = "Latitude: " + position.coords.latitude +
-  "<br>Longitude: " + position.coords.longitude;
+  x.innerHTML = "<img source='screenshot2.jpg'>";
 }
 
 function showError(error) {
   switch(error.code) {
+    x.innerHTML = "<img source='screenshot1.jpg'>";
     case error.PERMISSION_DENIED:
       x.innerHTML = "User denied the request for Geolocation."
       break;

